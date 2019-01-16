@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UdeployCliApplication {
+public class UdeployCliApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UdeployCliApplication.class, args);
+		SpringApplication.run(UdeployCliApp.class, args);
 	}
 
 }
