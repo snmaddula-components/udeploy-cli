@@ -26,5 +26,6 @@ manifest:
   base-uri: https://udeploy2-wtc.prod.cloud.fedex.com:6371
   info-uri: 
   create-uri: /cli/resource/create 
+  add-tag: /cli/resource/tag
      
    
