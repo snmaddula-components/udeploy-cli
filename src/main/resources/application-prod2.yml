@@ -1,0 +1,11 @@
+server:
+  port: 9899
+  
+manifest:
+  base-uri:
+  username: udeploy_api
+  password: udeployritut25gtlaitrqecg
+  info: 
+  create: 
+     
+   
