@@ -17,7 +17,6 @@ public class AppService {
 	private RestTemplate rt;
 	private UDeployManifest manifest;
 	
-	
 	public UDResourceRes createResource(UDResourceReq resourceReq) {
 		return rt.
 				exchange(manifest.createResourceUri().toUri(), PUT, new HttpEntity(resourceReq), UDResourceRes.class)

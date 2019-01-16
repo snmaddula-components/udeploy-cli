@@ -23,7 +23,6 @@ public class UDeployManifest {
 
 	public UriComponents createResourceUri() {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createUri).build();
-//				.buildAndExpand("junit-5");
 	}
 
 }

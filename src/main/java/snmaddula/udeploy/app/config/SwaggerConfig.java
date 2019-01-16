@@ -1,4 +1,4 @@
-package snmaddula.udeploy.app;
+package snmaddula.udeploy.app.config;
 
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 import static springfox.documentation.spi.DocumentationType.SWAGGER_2;
@@ -21,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Controller
 @EnableSwagger2
 @ConfigurationProperties(prefix = "swagger")
-class AppSwaggerContext {
+class SwaggerConfig {
 
 	private String title;
     private String version;
