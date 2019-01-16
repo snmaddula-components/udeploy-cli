@@ -23,8 +23,8 @@ multipart:
   inbox: ./inbox
 
 manifest:
-  base-uri: 
-  info: 
-  create: 
+  base-uri: https://udeploy2-wtc.prod.cloud.fedex.com:6371
+  info-uri: 
+  create-uri: /cli/resource/create 
      
    
