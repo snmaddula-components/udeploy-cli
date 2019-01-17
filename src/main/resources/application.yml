@@ -5,7 +5,7 @@ swagger:
   title: uDeploy Spring Boot API
   version: 1.0
   description: Spring Boot UDeploy Client App
-  base-package: snmaddula.udeploy.app.controller
+  base-package: com.fexed.udeploy.app.controller
   contact-name: Vaishnavi
   contact-url:  
   contact-email: abc@gmail.com

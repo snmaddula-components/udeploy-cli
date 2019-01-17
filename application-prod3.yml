@@ -1,13 +1,10 @@
-server:
-  port: 9899
+#server:
+#  port: 9910
   
 manifest:
   base-uri:
   username: udeploy_api
   password: udeployritut25gtlaitrqecg
-  info: 
-  create: 
-     
    
 udeploy:
   app-name: INTERATIONDELETELISTENER
