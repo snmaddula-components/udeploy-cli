@@ -13,7 +13,7 @@ import lombok.Data;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties("udeploy")
-public class Udeploy {
+public class UdeployConfig {
 
 	private String team;
 	private String appName;

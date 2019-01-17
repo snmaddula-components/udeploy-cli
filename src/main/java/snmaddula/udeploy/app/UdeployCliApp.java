@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import snmaddula.udeploy.app.config.Udeploy;
+import snmaddula.udeploy.app.config.UdeployConfig;
 
 @SpringBootApplication
 public class UdeployCliApp {
@@ -15,7 +15,7 @@ public class UdeployCliApp {
 	}
 	
 	@Bean
-	public CommandLineRunner cli(Udeploy ud) {
+	public CommandLineRunner cli(UdeployConfig ud) {
 		return (args) -> System.out.println(ud);
 	}
 
