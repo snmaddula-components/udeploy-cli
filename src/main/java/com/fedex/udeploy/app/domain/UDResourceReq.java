@@ -1,4 +1,4 @@
-package snmaddula.udeploy.app.domain;
+package com.fedex.udeploy.app.domain;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 

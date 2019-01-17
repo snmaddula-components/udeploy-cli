@@ -1,4 +1,4 @@
-package snmaddula.udeploy.app.service;
+package com.fedex.udeploy.app.service;
 
 import static org.springframework.http.HttpMethod.PUT;
 
@@ -7,11 +7,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fedex.udeploy.app.config.UDeployManifest;
+import com.fedex.udeploy.app.config.UdeployConfig;
+import com.fedex.udeploy.app.domain.UDResourceReq;
+import com.fedex.udeploy.app.domain.UDResourceRes;
+
 import lombok.AllArgsConstructor;
-import snmaddula.udeploy.app.config.UDeployManifest;
-import snmaddula.udeploy.app.config.UdeployConfig;
-import snmaddula.udeploy.app.domain.UDResourceReq;
-import snmaddula.udeploy.app.domain.UDResourceRes;
 
 @Service
 @AllArgsConstructor

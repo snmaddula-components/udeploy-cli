@@ -1,4 +1,4 @@
-package snmaddula.udeploy.app.config;
+package com.fedex.udeploy.app.config;
 
 import static org.apache.commons.codec.binary.Base64.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -6,22 +6,10 @@ swagger:
   version: 1.0
   description: Spring Boot UDeploy Client App
   base-package: snmaddula.udeploy.app.controller
-  contact-name: snmaddula
-  contact-url: snmaddula.github.io 
-  contact-email: snmaddula@gmail.com
+  contact-name: Vaishnavi
+  contact-url:  
+  contact-email: abc@gmail.com
   
-  
-spring:
-  servlet:
-    multipart:
-      enabled: true
-      file-size-threshold: 25MB
-      max-file-size: 50MB
-      max-request-size: 100MB
-
-multipart: 
-  inbox: ./inbox
-
 manifest:
   base-uri: https://udeploy2-wtc.prod.cloud.fedex.com:6371
   info-uri: 

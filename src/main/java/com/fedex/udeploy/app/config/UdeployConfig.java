@@ -1,4 +1,4 @@
-package snmaddula.udeploy.app.config;
+package com.fedex.udeploy.app.config;
 
 import java.util.List;
 import java.util.Map;
