@@ -1,6 +1,7 @@
 package com.fedex.udeploy.app.config;
 
-import static org.apache.commons.codec.binary.Base64.*;
+import static org.apache.commons.codec.binary.Base64.encodeBase64;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
@@ -23,9 +24,17 @@ public class UDeployManifest {
 
 	private String infoUri;
 	private String createUri;
+	private String createTeamUri;
 
 	public UriComponents createResourceUri() {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createUri).build();
+	}
+
+	public UriComponents createTeamUri(String agent, String team) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createTeamUri)
+				.queryParam("agent", agent)
+				.queryParam("team", team)
+				.build();
 	}
 
 	public HttpHeaders getBasicAuthHeaders() {

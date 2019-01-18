@@ -4,7 +4,8 @@ server:
 manifest:
   base-url: https://udeploy2-wtc.prod.cloud.fedex.com:6371
   info-uri: 
-  create-uri: /cli/resource/create 
   add-tag: /cli/resource/tag
+  create-uri: /cli/resource/create 
+  create-team-uri: /cli/agentCLI/teams 
   username: udeploy_api
   password: udeployritut25gtlaitrqecg
