@@ -1,4 +1,4 @@
-package com.fedex.udeploy.app.domain;
+package com.fedex.udeploy.app.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
