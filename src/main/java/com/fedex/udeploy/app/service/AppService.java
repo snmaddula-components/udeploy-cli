@@ -2,15 +2,19 @@ package com.fedex.udeploy.app.service;
 
 import static org.springframework.http.HttpMethod.PUT;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import static com.fedex.udeploy.app.UdeployCliApp.*;
 import com.fedex.udeploy.app.config.UDeployManifest;
 import com.fedex.udeploy.app.config.UdeployConfig;
-import com.fedex.udeploy.app.domain.UDResourceReq;
-import com.fedex.udeploy.app.domain.UDResourceRes;
+import com.fedex.udeploy.app.dto.UDResourceReq;
+import com.fedex.udeploy.app.dto.UDResourceRes;
 
 import lombok.AllArgsConstructor;
 
@@ -21,21 +25,30 @@ public class AppService {
 	private RestTemplate rt;
 	private UdeployConfig udeploy;
 	private UDeployManifest manifest;
+	private ApplicationContext applicationContext;
 
 	public void createResource() {
-		udeploy.getResourceMap().forEach((level, agents) -> {
+		try {
 			final String parent = udeploy.getResourceGroup();
 			final String appName = udeploy.getAppName();
 			final String team = udeploy.getTeam();
 			final String component = udeploy.getComponentName();
-			agents.forEach(agent -> {
-				addAgent(parent, appName, level, agent);
-				addTeam(agent, team);
-				addComponent(parent, appName, level, agent, component);
+			udeploy.getDataCenters().forEach(dc -> {
+				dc.getResourceMap().forEach((level, agents) -> {
+					agents.forEach(agent -> {
+						addAgent(parent, appName, level, agent);
+						addTeam(agent, team);
+						addComponent(parent, appName, level, agent, component);
+					});
+				});
 			});
-		});
+		} catch (Throwable t) {
+			t.printStackTrace();
+		} finally {
+//			shutdown();
+		}
 	}
-	
+
 	private void addAgent(String parent, String appName, String level, String agent) {
 		HttpEntity<UDResourceReq> entity = new HttpEntity<>(new UDResourceReq(parent, appName, level, agent), manifest.getBasicAuthHeaders());
 		try {
@@ -65,4 +78,5 @@ public class AppService {
 			System.err.println("COMPONENT [ " + component + " ] ALREADY EXISTS FOR AGENT [ " + agent + " ]");
 		}
 	}
+
 }
