@@ -2,15 +2,13 @@ package com.fedex.udeploy.app.service;
 
 import static org.springframework.http.HttpMethod.PUT;
 
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import static com.fedex.udeploy.app.UdeployCliApp.*;
 import com.fedex.udeploy.app.config.UDeployManifest;
 import com.fedex.udeploy.app.config.UdeployConfig;
 import com.fedex.udeploy.app.dto.UDResourceReq;
@@ -45,7 +43,7 @@ public class AppService {
 		} catch (Throwable t) {
 			t.printStackTrace();
 		} finally {
-//			shutdown();
+			shutdown();
 		}
 	}
 
@@ -76,6 +74,14 @@ public class AppService {
 			System.out.println("COMPONENT: [" + component + " ] ADDED TO AGENT: [ " + agent + " ]");
 		} catch (HttpClientErrorException.BadRequest ex) {
 			System.err.println("COMPONENT [ " + component + " ] ALREADY EXISTS FOR AGENT [ " + agent + " ]");
+		}
+	}
+	
+	private void shutdown() {
+		try {
+			((ConfigurableApplicationContext) applicationContext).close();
+		}catch(Throwable t) {
+			t.printStackTrace();
 		}
 	}
 

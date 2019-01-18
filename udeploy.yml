@@ -1,8 +1,8 @@
 udeploy:
+  team: CVM
   app-name: INTERATIONDELETELISTENER
   component-name: INTETACTION
   resource-group: ECDC
-  team: CVM
   data-centers:
     - name: EDC
       resource-map:
