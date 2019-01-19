@@ -28,8 +28,6 @@ public class Udeploy {
 
 	private static final String DATACENTER = "Data Center";
 	private static final String LEVELS = "Levels";
-	private static final String APP = "App";
-	private static final String COMPONENT = "component";
 
 	private String team;
 	private String appName;
@@ -40,8 +38,14 @@ public class Udeploy {
 	@JsonIgnore
 	private final DataFormatter dataFormatter;
 
-	@Value("${input-file}")
+	@Value("${input-file:}")
 	private String inputFile;
+	
+	@Value("${app-index:1}")
+	private Integer appIndex;
+	
+	@Value("${component-index:2}")
+	private Integer comIndex;
 
 	public Udeploy() {
 		dataFormatter = new DataFormatter();
@@ -50,8 +54,8 @@ public class Udeploy {
 	@PostConstruct
 	public void buildConfig() throws EncryptedDocumentException, IOException {
 		final Workbook workbook = WorkbookFactory.create(new File(inputFile));
-		final Sheet appSheet = workbook.getSheet(APP);
-		final Sheet comSheet = workbook.getSheet(COMPONENT);
+		final Sheet appSheet = workbook.getSheetAt(appIndex -1);
+		final Sheet comSheet = workbook.getSheetAt(comIndex -1);
 		final int rowCount = appSheet.getPhysicalNumberOfRows();
 
 		initSimpleFields(appSheet, comSheet);

@@ -1,3 +1,9 @@
 mvn clean package
 
 java -jar target/udeploy-cli.jar --input-file=C:/Users/snmaddula/Documents/udeploy-ws/samples/HAIP-TEST.xlsx
+
+############ 
+By default the program will assume that first sheet is "App" (i.e index 1) and second sheet is "Component" (i.e index 2).
+
+In case if you have these sheets at different indexes, pass that information to the progam using the below arguments:
+--app-index=<> --sheet-index=
