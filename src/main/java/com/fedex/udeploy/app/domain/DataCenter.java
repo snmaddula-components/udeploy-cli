@@ -1,8 +1,5 @@
 package com.fedex.udeploy.app.domain;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,13 +29,5 @@ public class DataCenter {
 			getResourceMap().get(level).add(agent);
 		}
 	}
-	/*
-	public String toString() {
-		return reflectionToString(this, JSON_STYLE);
-	}*/
 	
-	@Override
-	public boolean equals(Object obj) {
-		return getName().equalsIgnoreCase(((DataCenter)obj).getName());
-	}
 }

@@ -1,3 +1,3 @@
 mvn clean package
 
-java -jar target/udeploy-cli.jar --spring.config.additional-location=udeploy.yml
+java -jar target/udeploy-cli.jar --input-file=C:/Users/snmaddula/Documents/udeploy-ws/samples/HAIP-TEST.xlsx
