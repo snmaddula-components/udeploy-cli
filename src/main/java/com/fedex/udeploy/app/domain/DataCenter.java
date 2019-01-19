@@ -32,10 +32,10 @@ public class DataCenter {
 			getResourceMap().get(level).add(agent);
 		}
 	}
-	
+	/*
 	public String toString() {
 		return reflectionToString(this, JSON_STYLE);
-	}
+	}*/
 	
 	@Override
 	public boolean equals(Object obj) {

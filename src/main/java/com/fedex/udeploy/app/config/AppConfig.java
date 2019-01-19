@@ -17,12 +17,24 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 @Configuration
 public class AppConfig {
 
 	@Bean
 	public RestTemplate restTemplate() throws Exception {
 		return new RestTemplate(clientHttpRequestFactory());
+	}
+	
+	@Bean
+	public ObjectWriter writer() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		return mapper.writerWithDefaultPrettyPrinter();
 	}
 	
 	private ClientHttpRequestFactory clientHttpRequestFactory() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException {

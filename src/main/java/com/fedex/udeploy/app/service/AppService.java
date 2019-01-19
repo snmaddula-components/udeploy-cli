@@ -2,6 +2,8 @@ package com.fedex.udeploy.app.service;
 
 import static org.springframework.http.HttpMethod.PUT;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpEntity;
@@ -9,22 +11,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fedex.udeploy.app.config.UDeployManifest;
-import com.fedex.udeploy.app.config.UdeployConfig;
+import com.fedex.udeploy.app.config.Udeploy;
 import com.fedex.udeploy.app.dto.UDResourceReq;
 import com.fedex.udeploy.app.dto.UDResourceRes;
 
 import lombok.AllArgsConstructor;
 
-//@Service
+@Service
 @AllArgsConstructor
 public class AppService {
 
 	private RestTemplate rt;
-	private UdeployConfig udeploy;
+	private Udeploy udeploy;
+	private ObjectWriter writer;
 	private UDeployManifest manifest;
 	private ApplicationContext applicationContext;
-
+	
 	public void createResource() {
 		try {
 			final String parent = udeploy.getResourceGroup();
@@ -75,6 +80,13 @@ public class AppService {
 		} catch (HttpClientErrorException.BadRequest ex) {
 			System.err.println("COMPONENT [ " + component + " ] ALREADY EXISTS FOR AGENT [ " + agent + " ]");
 		}
+	}
+	
+	@PostConstruct
+	public void logConfig() throws JsonProcessingException {
+		System.out.println("\n==================================== UDEPLOY CONFIG =====================================");
+		System.out.println("\n" + writer.writeValueAsString(udeploy));
+		System.out.println("\n=========================================================================================\n");
 	}
 	
 	private void shutdown() {

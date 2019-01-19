@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.fedex.udeploy.app.config.UdeployConfig;
 import com.fedex.udeploy.app.service.AppService;
 
 @SpringBootApplication
@@ -16,10 +15,11 @@ public class UdeployCliApp {
 	}
 
 	@Bean
-	public CommandLineRunner cli(UdeployConfig udeployConfig) {
+	public CommandLineRunner cli(AppService appService) {
 		return (args) -> {
-			System.out.println(udeployConfig);
-			//service.createResource();
+//			appService.createResource();
 		};
 	}
+
+	
 }
