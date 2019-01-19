@@ -16,10 +16,10 @@ public class UdeployCliApp {
 	}
 
 	@Bean
-	public CommandLineRunner cli(UdeployConfig udeployConfig, AppService service) {
+	public CommandLineRunner cli(UdeployConfig udeployConfig) {
 		return (args) -> {
 			System.out.println(udeployConfig);
-			service.createResource();
+			//service.createResource();
 		};
 	}
 }

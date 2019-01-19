@@ -16,7 +16,7 @@ import com.fedex.udeploy.app.dto.UDResourceRes;
 
 import lombok.AllArgsConstructor;
 
-@Service
+//@Service
 @AllArgsConstructor
 public class AppService {
 
