@@ -17,7 +17,8 @@ public class UdeployCliApp {
 	@Bean
 	public CommandLineRunner cli(AppService appService) {
 		return (args) -> {
-//			appService.createResource();
+			// Un-comment the below statement to enable processing
+			//appService.createResource();
 		};
 	}
 
