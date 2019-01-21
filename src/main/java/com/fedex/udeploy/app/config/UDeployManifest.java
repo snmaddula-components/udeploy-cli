@@ -24,16 +24,39 @@ public class UDeployManifest {
 
 	private String infoUri;
 	private String createUri;
+	private String checkTeamUri;
+	private String createTagUri;
 	private String createTeamUri;
+	private String checkResourceUri;
 
 	public UriComponents createResourceUri() {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createUri).build();
 	}
 
+	public UriComponents checkTeamUri(String team) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(checkTeamUri)
+				.queryParam("team", team)
+				.build();
+	}
+	
 	public UriComponents createTeamUri(String agent, String team) {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createTeamUri)
 				.queryParam("agent", agent)
 				.queryParam("team", team)
+				.build();
+	}
+
+	public UriComponents createTagUri(String parent, String agent, String dcName) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createTagUri)
+				.queryParam("resource", parent)
+				.queryParam("agent", agent)
+				.queryParam("tag", dcName)
+				.build();
+	}
+	
+	public UriComponents checkParentUri(String parent) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(checkResourceUri)
+				.queryParam("parent", parent)
 				.build();
 	}
 

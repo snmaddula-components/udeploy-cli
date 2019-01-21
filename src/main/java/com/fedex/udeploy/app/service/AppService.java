@@ -20,9 +20,11 @@ public class AppService {
 	private ObjectWriter writer;
 	private ApplicationContext applicationContext;
 	
+	private TagService tagService;
 	private TeamService teamService;
 	private AgentService agentService;
 	private ComponentService componentService;
+	private ValidationService validationService;
 	
 	public void createResource() {
 		try {
@@ -30,11 +32,17 @@ public class AppService {
 			final String appName = udeploy.getAppName();
 			final String team = udeploy.getTeam();
 			final String component = udeploy.getComponentName();
+			
+			validationService.validateTeam(team);
+			validationService.validateParent(parent);
+			
 			udeploy.getDataCenters().forEach(dc -> {
+				final String dcName = dc.getName();
 				dc.getResourceMap().forEach((level, agents) -> {
 					agents.forEach(agent -> {
 						agentService.addAgent(parent, appName, level, agent);
 						teamService.addTeam(agent, team);
+						tagService.addTag(parent, agent, dcName);
 						componentService.addComponent(parent, appName, level, agent, component);
 					});
 				});

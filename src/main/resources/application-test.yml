@@ -2,10 +2,4 @@ server:
   port: 9899
 
 manifest:
-  base-url: https://udeploy2-wtc.prod.cloud.fedex.com:6371
-  info-uri: 
-  add-tag: /cli/resource/tag
-  create-uri: /cli/resource/create 
-  create-team-uri: /cli/agentCLI/teams 
-  username: udeploy_api
-  password: udeployritut25gtlaitrqecg
+  base-url: http://udeploy.test.cloud.fedex.com:8080
