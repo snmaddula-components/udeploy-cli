@@ -46,10 +46,9 @@ public class UDeployManifest {
 				.build();
 	}
 
-	public UriComponents createTagUri(String parent, String agent, String dcName) {
+	public UriComponents createTagUri(String resource, String dcName) {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createTagUri)
-				.queryParam("resource", parent)
-				.queryParam("agent", agent)
+				.queryParam("resource", resource)
 				.queryParam("tag", dcName)
 				.build();
 	}

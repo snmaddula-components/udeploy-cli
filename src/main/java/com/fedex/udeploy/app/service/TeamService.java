@@ -1,10 +1,10 @@
 package com.fedex.udeploy.app.service;
 
-import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.PUT;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fedex.udeploy.app.config.UDeployManifest;
@@ -21,11 +21,12 @@ public class TeamService {
 	
 	public void addTeam(String agent, String team) {
 		HttpEntity<UDResourceReq> entity = new HttpEntity<>(manifest.getBasicAuthHeaders());
-		try {
-			rt.exchange(manifest.createTeamUri(agent, team).toUri(), PUT, entity, Object.class);
+		ResponseEntity<String> response = rt.exchange(manifest.createTeamUri(agent, team).toUri(), PUT, entity, String.class);
+		int statusCode = response.getStatusCodeValue();
+		if(statusCode == 200) {
 			System.out.println("AGENT: [" + agent + " ] ADDED TO TEAM: [ " + team + " ]");
-		} catch (HttpClientErrorException.BadRequest ex) {
-			System.err.println(ex.getLocalizedMessage());
+		}else {
+			System.err.println(response.getBody());
 		}
 	}
 

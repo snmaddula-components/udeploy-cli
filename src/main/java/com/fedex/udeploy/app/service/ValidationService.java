@@ -22,14 +22,7 @@ public class ValidationService {
 	private UDeployManifest manifest;
 	
 	public void validateTeam(String team) {
-		HttpEntity<UDResourceReq> entity = new HttpEntity<>(manifest.getBasicAuthHeaders());
-		try {
-			rt.exchange(manifest.checkTeamUri(team).toUri(), GET, entity, Object.class);
-		} catch (HttpClientErrorException.NotFound ex) {
-			System.err.println("TEAM: [ " + team + " ] IS NOT VALID!");
-			System.out.println("Exiting..");
-			System.exit(-1);
-		}
+		validateRequest(team, "TEAM");
 	}
 	
 	public void validateParent(String parent) {
@@ -39,12 +32,19 @@ public class ValidationService {
 		if(!parent.endsWith(SLASH)) {
 			parent = parent + SLASH;
 		}
+		validateRequest(parent, "PARENT");
+	}
+	
+	private void validateRequest(String resource, String resourceType) {
 		HttpEntity<UDResourceReq> entity = new HttpEntity<>(manifest.getBasicAuthHeaders());
 		try {
-			rt.exchange(manifest.checkParentUri(parent).toUri(), GET, entity, Object.class);
-		} catch (HttpClientErrorException.NotFound ex) {
-			System.err.println("PARENT RESOURCE: [ " + parent + " ] IS NOT VALID!");
+			rt.exchange(manifest.checkTeamUri(resource).toUri(), GET, entity, String.class);
+		} catch (HttpClientErrorException ex) {
+			System.err.println(resourceType+": [ " + resource + " ] IS NOT VALID!");
 			System.out.println("Exiting..");
+			System.exit(-1);
+		} catch(Exception ex) {
+			System.err.println(ex.getMessage());
 			System.exit(-1);
 		}
 	}

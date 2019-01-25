@@ -3,3 +3,5 @@ server:
 
 manifest:
   base-url: https://udeploy-wtc.prod.cloud.fedex.com:6371
+#  username: 3710531
+#  password: Basket28

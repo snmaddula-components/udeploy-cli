@@ -7,6 +7,8 @@ manifest:
   check-team-uri: /cli/team/info
   create-uri: /cli/resource/create 
   check-resource-uri: /cli/resource
-  create-team-uri: /cli/agentCLI/teams 
-  username: udeploy_api
-  password: udeployritut25gtlaitrqecg
+  create-team-uri: /cli/agentCLI/teams
+  username: ${username}
+  password: ${password} 
+#  username: udeploy_api
+#  password: udeployritut25gtlaitrqecg

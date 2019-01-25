@@ -1,5 +1,9 @@
 package com.fedex.udeploy.app.config;
 
+import static org.springframework.http.HttpStatus.Series.CLIENT_ERROR;
+import static org.springframework.http.HttpStatus.Series.SERVER_ERROR;
+
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -11,10 +15,15 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
+import org.apache.poi.util.IOUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +35,25 @@ public class AppConfig {
 
 	@Bean
 	public RestTemplate restTemplate() throws Exception {
-		return new RestTemplate(clientHttpRequestFactory());
+		RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory());
+		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+		/*
+		 * restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
+		 * 
+		 * });
+		 */
+		restTemplate.setErrorHandler(new ResponseErrorHandler() {
+			
+			@Override
+			public boolean hasError(ClientHttpResponse response) throws IOException {
+				return false;
+			}
+			
+			@Override
+			public void handleError(ClientHttpResponse response) throws IOException {
+			}
+		});
+		return restTemplate;
 	}
 	
 	@Bean

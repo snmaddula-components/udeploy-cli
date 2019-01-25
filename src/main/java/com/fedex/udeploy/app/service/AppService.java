@@ -33,8 +33,8 @@ public class AppService {
 			final String team = udeploy.getTeam();
 			final String component = udeploy.getComponentName();
 			
-			validationService.validateTeam(team);
-			validationService.validateParent(parent);
+//		validationService.validateTeam(team);
+//		validationService.validateParent(parent);
 			
 			udeploy.getDataCenters().forEach(dc -> {
 				final String dcName = dc.getName();
@@ -42,7 +42,7 @@ public class AppService {
 					agents.forEach(agent -> {
 						agentService.addAgent(parent, appName, level, agent);
 						teamService.addTeam(agent, team);
-						tagService.addTag(parent, agent, dcName);
+						tagService.addTag(parent, appName, level, agent, dcName);
 						componentService.addComponent(parent, appName, level, agent, component);
 					});
 				});
