@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -16,6 +17,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AppService {
 
+	private static final String SLASH = "/";
+	
 	private Udeploy udeploy;
 	private ObjectWriter writer;
 	private ApplicationContext applicationContext;
@@ -25,6 +28,7 @@ public class AppService {
 	private AgentService agentService;
 	private ComponentService componentService;
 	private ValidationService validationService;
+	private ResourceService resourceService;
 	
 	public void createResource() {
 		try {
@@ -33,17 +37,22 @@ public class AppService {
 			final String team = udeploy.getTeam();
 			final String component = udeploy.getComponentName();
 			
-//		validationService.validateTeam(team);
-//		validationService.validateParent(parent);
+			resourceService.createRoot(parent, appName);
+			
+	//		validationService.validateTeam(team);
+	//		validationService.validateParent(parent);
 			
 			udeploy.getDataCenters().forEach(dc -> {
 				final String dcName = dc.getName();
 				dc.getResourceMap().forEach((level, agents) -> {
+					resourceService.createGroup(parent, appName, level);
 					agents.forEach(agent -> {
 						agentService.addAgent(parent, appName, level, agent);
 						teamService.addTeam(agent, team);
 						tagService.addTag(parent, appName, level, agent, dcName);
-						componentService.addComponent(parent, appName, level, agent, component);
+						if(StringUtils.hasText(component)) {
+							componentService.addComponent(parent, appName, level, agent, component);
+						}
 					});
 				});
 			});

@@ -5,8 +5,8 @@ manifest:
   base-url: http://udeploy.test.cloud.fedex.com:8080
   create-tag-uri: /cli/resource/tag
   check-team-uri: /cli/team/info
-  create-uri: /cli/resource/create 
   check-resource-uri: /cli/resource
+  create-resource-uri: /cli/resource/create 
   create-team-uri: /cli/agentCLI/teams
   username: ${username}
   password: ${password} 

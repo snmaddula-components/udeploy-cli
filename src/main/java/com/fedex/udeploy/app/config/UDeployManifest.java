@@ -23,14 +23,14 @@ public class UDeployManifest {
 	private String password;
 
 	private String infoUri;
-	private String createUri;
 	private String checkTeamUri;
 	private String createTagUri;
 	private String createTeamUri;
 	private String checkResourceUri;
+	private String createResourceUri;
 
 	public UriComponents createResourceUri() {
-		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createUri).build();
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createResourceUri).build();
 	}
 
 	public UriComponents checkTeamUri(String team) {
@@ -58,7 +58,7 @@ public class UDeployManifest {
 				.queryParam("parent", parent)
 				.build();
 	}
-
+	
 	public HttpHeaders getBasicAuthHeaders() {
 		return new HttpHeaders() {{
 			add("Authorization", "Basic " + new String(encodeBase64((username + ":" + password).getBytes())));
