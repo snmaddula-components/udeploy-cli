@@ -27,7 +27,7 @@ public class UDResourceReq {
 	}
 	
 	public UDResourceReq(String parent, String appName, String level) {
-		this.parent = this.parent + SLASH + appName;
+		this.parent = SLASH + parent + SLASH + appName;
 		this.name = level;
 	}
 	
