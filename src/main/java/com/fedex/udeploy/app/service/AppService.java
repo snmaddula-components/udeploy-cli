@@ -37,7 +37,8 @@ public class AppService {
 			final String team = udeploy.getTeam();
 			final String component = udeploy.getComponentName();
 			
-			resourceService.createRoot(parent, appName);
+			resourceService.createRoot(parent);
+			resourceService.createApp(parent, appName);
 			
 	//		validationService.validateTeam(team);
 	//		validationService.validateParent(parent);

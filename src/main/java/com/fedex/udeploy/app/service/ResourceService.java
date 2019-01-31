@@ -21,13 +21,24 @@ public class ResourceService {
 	private RestTemplate rt;
 	private UDeployManifest manifest;
 
-	public void createRoot(String parent, String appName) {
-		final String root = SLASH + parent + SLASH + appName;
-		HttpEntity<UDResourceReq> entity = new HttpEntity<>(new UDResourceReq(parent, appName), manifest.getBasicAuthHeaders());
+	public void createRoot(String root) {
+		HttpEntity<UDResourceReq> entity = new HttpEntity<>(new UDResourceReq(root), manifest.getBasicAuthHeaders());
 		ResponseEntity<String> response = rt.exchange(manifest.createResourceUri().toUri(), PUT, entity, String.class);
 		int statusCode = response.getStatusCodeValue();
 		if(statusCode == 200) {
 			System.out.println("CREATED ROOT: [ " + root + " ]");
+		}else {
+			System.err.println(response.getBody());
+		}
+	}
+	
+	public void createApp(String parent, String appName) {
+		final String root = SLASH + parent;
+		HttpEntity<UDResourceReq> entity = new HttpEntity<>(new UDResourceReq(parent, appName), manifest.getBasicAuthHeaders());
+		ResponseEntity<String> response = rt.exchange(manifest.createResourceUri().toUri(), PUT, entity, String.class);
+		int statusCode = response.getStatusCodeValue();
+		if(statusCode == 200) {
+			System.out.println("CREATED APP: [ " + appName + " ] IN  [ " + root + " ]");
 		}else {
 			System.err.println(response.getBody());
 		}
@@ -40,7 +51,7 @@ public class ResourceService {
 		ResponseEntity<String> response = rt.exchange(manifest.createResourceUri().toUri(), PUT, entity, String.class);
 		int statusCode = response.getStatusCodeValue();
 		if(statusCode == 200) {
-			System.out.println("CREATED GROUP: [ " + group + " ] UNDER ROOT: [ " + root + " ]");
+			System.out.println("CREATED GROUP: [ " + group + " ] IN [ " + root + " ]");
 		}else {
 			System.err.println(response.getBody());
 		}
