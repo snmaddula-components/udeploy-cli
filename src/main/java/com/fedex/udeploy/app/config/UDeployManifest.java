@@ -28,9 +28,30 @@ public class UDeployManifest {
 	private String createTeamUri;
 	private String checkResourceUri;
 	private String createResourceUri;
+	private String createComponentUri;
+	private String createApplicationUri;
+	private String createEnvironmentUri;
 
 	public UriComponents createResourceUri() {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createResourceUri).build();
+	}
+
+	public UriComponents createComponentUri() {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createComponentUri).build();
+	}
+	
+	public UriComponents createEnvironmentUri(String appName, String level, String color) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createEnvironmentUri)
+				.queryParam("application", appName)
+				.queryParam("name", level)
+				.queryParam("color", color)
+				.queryParam("description", "")
+				.queryParam("requireApprovals", false)
+				.build();
+	}
+
+	public UriComponents createApplicationUri() {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createApplicationUri).build();
 	}
 
 	public UriComponents checkTeamUri(String team) {

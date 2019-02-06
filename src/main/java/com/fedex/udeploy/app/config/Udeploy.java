@@ -32,6 +32,8 @@ public class Udeploy {
 	private String team;
 	private String appName;
 	private String componentName;
+	private String componentDesc;
+	private String componentPath;
 	private String resourceGroup;
 	private List<DataCenter> dataCenters;
 
@@ -68,6 +70,8 @@ public class Udeploy {
 		resourceGroup = dataFormatter.formatCellValue(appSheet.getRow(5).getCell(1));
 		team = dataFormatter.formatCellValue(appSheet.getRow(7).getCell(1));
 		componentName = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(0));
+		componentDesc = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(1));
+		componentPath = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(4));
 		dataCenters = new ArrayList<>();
 	}
 

@@ -5,6 +5,7 @@ import static org.springframework.http.HttpMethod.PUT;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.fedex.udeploy.app.config.UDeployManifest;
@@ -28,7 +29,7 @@ public class ResourceService {
 		if(statusCode == 200) {
 			System.out.println("CREATED ROOT: [ " + root + " ]");
 		}else {
-			System.err.println(response.getBody());
+			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
 		}
 	}
 	
@@ -40,7 +41,7 @@ public class ResourceService {
 		if(statusCode == 200) {
 			System.out.println("CREATED APP: [ " + appName + " ] IN  [ " + root + " ]");
 		}else {
-			System.err.println(response.getBody());
+			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
 		}
 	}
 	
@@ -53,7 +54,7 @@ public class ResourceService {
 		if(statusCode == 200) {
 			System.out.println("CREATED GROUP: [ " + group + " ] IN [ " + root + " ]");
 		}else {
-			System.err.println(response.getBody());
+			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
 		}
 	}
 	
@@ -65,7 +66,7 @@ public class ResourceService {
 		if(statusCode == 200) {
 			System.out.println("TAG: [" + dcName + " ] ADDED TO AGENT: [ " + agent + " ]");
 		}else {
-			System.err.println(response.getBody());
+			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
 		}
 	}
 }

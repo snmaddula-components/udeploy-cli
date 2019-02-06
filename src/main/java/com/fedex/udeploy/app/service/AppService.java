@@ -26,16 +26,23 @@ public class AppService {
 	private TagService tagService;
 	private TeamService teamService;
 	private AgentService agentService;
+	private ResourceService resourceService;
 	private ComponentService componentService;
 	private ValidationService validationService;
-	private ResourceService resourceService;
+	private ApplicationService applicationService;
+	private EnvironmentService environmentService;
 	
 	public void createResource() {
 		try {
 			final String parent = udeploy.getResourceGroup();
 			final String appName = udeploy.getAppName();
 			final String team = udeploy.getTeam();
-			final String component = udeploy.getComponentName();
+			final String componentName = udeploy.getComponentName();
+			final String componentDesc = udeploy.getComponentDesc();
+			final String componentPath = udeploy.getComponentPath();
+			
+			applicationService.createApplication(appName, parent);
+			componentService.createComponent(componentName, componentDesc, componentPath);
 			
 			resourceService.createRoot(parent);
 			resourceService.createApp(parent, appName);
@@ -49,10 +56,11 @@ public class AppService {
 					resourceService.createGroup(parent, appName, level);
 					agents.forEach(agent -> {
 						agentService.addAgent(parent, appName, level, agent);
+						environmentService.createEnvironment(appName, level);
 						teamService.addTeam(agent, team);
 						tagService.addTag(parent, appName, level, agent, dcName);
-						if(StringUtils.hasText(component)) {
-							componentService.addComponent(parent, appName, level, agent, component);
+						if(StringUtils.hasText(componentName)) {
+							componentService.addComponent(parent, appName, level, agent, componentName);
 						}
 					});
 				});

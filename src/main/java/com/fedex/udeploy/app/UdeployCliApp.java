@@ -18,7 +18,7 @@ public class UdeployCliApp {
 	public CommandLineRunner cli(AppService appService) {
 		return (args) -> {
 			// Un-comment the below statement to enable processing
-			appService.createResource();
+//			appService.createResource();
 		};
 	}
 
