@@ -24,16 +24,16 @@ public class EnvironmentService {
 
 	private HashMap<String, String> envColors = new HashMap<String, String>() {
 		{
-			put("L0", "%23404041");
-			put("L1", "%23DD731C"); // cinnamon
-			put("L2", "%2317AF4B"); // mountain meadow
-			put("L3", "%23D9182D"); // crimson
-			put("L4", "%23FFCF01"); // tangerine yellow
-			put("L5", "%23838329"); // olive
-			put("L6", "%2300B2EF"); // bright cerulean
-			put("L7", "%2383827F"); // battleship gray
-			put("L8", "%23EF98AA"); // mauvelous
-			put("LP", "%237F1C7D");
+			put("L0", "#404041");
+			put("L1", "#DD731C"); // cinnamon
+			put("L2", "#17AF4B"); // mountain meadow
+			put("L3", "#D9182D"); // crimson
+			put("L4", "#FFCF01"); // tangerine yellow
+			put("L5", "#838329"); // olive
+			put("L6", "#00B2EF"); // bright cerulean
+			put("L7", "#83827F"); // battleship gray
+			put("L8", "#EF98AA"); // mauvelous
+			put("LP", "#7F1C7D");
 		}
 	};
 	

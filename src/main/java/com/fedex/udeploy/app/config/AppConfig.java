@@ -9,7 +9,7 @@ import javax.net.ssl.SSLContext;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustStrategy;
+import org.apache.http.conn.ssl.TrustAllStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +18,7 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,10 +49,9 @@ public class AppConfig {
 		return mapper.writerWithDefaultPrettyPrinter();
 	}
 
-	private ClientHttpRequestFactory clientHttpRequestFactory()
+	private static ClientHttpRequestFactory clientHttpRequestFactory()
 			throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException {
-		final TrustStrategy acceptingTrustStrategy = (chain, authType) -> true;
-		final SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+		final SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(null, new TrustAllStrategy()).build();
 		final HttpClient httpClient = HttpClients.custom()
 				.setSSLSocketFactory(new SSLConnectionSocketFactory(sslContext)).build();
 		return new HttpComponentsClientHttpRequestFactory() {
@@ -59,5 +59,10 @@ public class AppConfig {
 				setHttpClient(httpClient);
 			}
 		};
+	}
+	
+	public static void main(String[] args) throws RestClientException, KeyManagementException, NoSuchAlgorithmException, KeyStoreException {
+		String response = new RestTemplate(clientHttpRequestFactory()).getForObject("https://localhost:8443/", String.class);
+		System.out.println(response);
 	}
 }

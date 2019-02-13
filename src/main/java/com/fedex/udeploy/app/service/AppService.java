@@ -43,6 +43,7 @@ public class AppService {
 			
 			applicationService.createApplication(appName, parent);
 			componentService.createComponent(componentName, componentDesc, componentPath);
+			componentService.addComponentToApp(appName, componentName);
 			
 			resourceService.createRoot(parent);
 			resourceService.createApp(parent, appName);
@@ -55,8 +56,9 @@ public class AppService {
 				dc.getResourceMap().forEach((level, agents) -> {
 					resourceService.createGroup(parent, appName, level);
 					agents.forEach(agent -> {
-						agentService.addAgent(parent, appName, level, agent);
 						environmentService.createEnvironment(appName, level);
+						agentService.addAgentToEnv(parent, appName, level, agent);
+						agentService.addAgent(parent, appName, level, agent);
 						teamService.addTeam(agent, team);
 						tagService.addTag(parent, appName, level, agent, dcName);
 						if(StringUtils.hasText(componentName)) {

@@ -63,4 +63,18 @@ public class ComponentService {
 			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
 		}
 	}
+	
+	public void addComponentToApp(String appName, String component) {
+		HttpEntity<UDResourceReq> entity = new HttpEntity<>(manifest.getBasicAuthHeaders());
+		ResponseEntity<String> response = rt.exchange(manifest.addComponentToAppUri(appName, component).toUri(), PUT, entity, String.class);
+		
+		int statusCode = response.getStatusCodeValue();
+		if(statusCode == 200) {
+			System.out.println("COMPONENT: [" + component + " ] ADDED TO APPLICATION: [ " + appName + " ]");
+		}else if(statusCode == 400) {
+			System.out.println("COMPONENT [ " + component + " ] ALREADY EXISTS FOR APPLICATION [ " + appName + " ]");
+		}else {
+			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
+		}
+	}
 }

@@ -31,6 +31,8 @@ public class UDeployManifest {
 	private String createComponentUri;
 	private String createApplicationUri;
 	private String createEnvironmentUri;
+	private String addComponentToAppUri;
+	private String addBaseResourceToEnvUri;
 
 	public UriComponents createResourceUri() {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createResourceUri).build();
@@ -77,6 +79,21 @@ public class UDeployManifest {
 	public UriComponents checkParentUri(String parent) {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(checkResourceUri)
 				.queryParam("parent", parent)
+				.build();
+	}
+
+	public UriComponents addComponentToAppUri(String application, String component) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(addComponentToAppUri)
+				.queryParam("application", application)
+				.queryParam("component", component)
+				.build();
+	}
+
+	public UriComponents addBaseResourceToEnvUri(String application, String environment, String resource) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(addBaseResourceToEnvUri)
+				.queryParam("application", application)
+				.queryParam("environment", environment)
+				.queryParam("resource", resource)
 				.build();
 	}
 	
