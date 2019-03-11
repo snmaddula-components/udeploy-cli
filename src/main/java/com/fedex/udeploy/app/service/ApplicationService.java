@@ -43,4 +43,15 @@ public class ApplicationService {
 			if(StringUtils.hasText(response.getBody())) if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
 		}
 	}
+	
+	public void addApplicationProperty(String application, String name, String value) {
+		HttpEntity<UDResourceReq> entity = new HttpEntity<>(manifest.getBasicAuthHeaders());
+		ResponseEntity<String> response = rt.exchange(manifest.addApplicationPropertyUri(application, name, value).toUri(), PUT, entity, String.class);
+		
+		int statusCode = response.getStatusCodeValue();
+		if(statusCode == 200) {
+			System.out.println("PROPERTY: [" + name + "=" + value + " ] ADDED TO APPLICATION: [ " + application + " ]");
+		}
+			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
+	}
 }

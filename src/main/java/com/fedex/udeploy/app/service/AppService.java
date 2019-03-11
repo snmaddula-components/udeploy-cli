@@ -36,14 +36,16 @@ public class AppService {
 		try {
 			final String parent = udeploy.getResourceGroup();
 			final String appName = udeploy.getAppName();
+			final String appEAI = udeploy.getAppEAI();
 			final String team = udeploy.getTeam();
 			final String componentName = udeploy.getComponentName();
 			final String componentDesc = udeploy.getComponentDesc();
 			final String componentPath = udeploy.getComponentPath();
 			
 			applicationService.createApplication(appName, parent);
-			componentService.createComponent(componentName, componentDesc, componentPath);
-			componentService.addComponentToApp(appName, componentName);
+			applicationService.addApplicationProperty(appName, "appName", appName);
+			applicationService.addApplicationProperty(appName, "appEAI", appEAI);
+			
 			
 			resourceService.createRoot(parent);
 			resourceService.createApp(parent, appName);

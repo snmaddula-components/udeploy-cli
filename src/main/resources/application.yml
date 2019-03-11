@@ -13,6 +13,8 @@ manifest:
   create-environment-uri: /cli/environment/createEnvironment
   add-component-to-app-uri: /cli/application/addComponentToApp
   add-base-resource-to-env-uri: /cli/environment/addBaseResource
+  add-application-property-uri: /cli/application/propValue
+  add-component-property-uri: /cli/component/propValue
   username: ${username}
   password: ${password} 
 #  username: udeploy_api

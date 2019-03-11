@@ -33,6 +33,8 @@ public class UDeployManifest {
 	private String createEnvironmentUri;
 	private String addComponentToAppUri;
 	private String addBaseResourceToEnvUri;
+	private String addComponentPropertyUri;
+	private String addApplicationPropertyUri;
 
 	public UriComponents createResourceUri() {
 		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(createResourceUri).build();
@@ -94,6 +96,22 @@ public class UDeployManifest {
 				.queryParam("application", application)
 				.queryParam("environment", environment)
 				.queryParam("resource", resource)
+				.build();
+	}
+	
+	public UriComponents addApplicationPropertyUri(String application, String name, String value) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(addApplicationPropertyUri)
+				.queryParam("application", application)
+				.queryParam("name", name)
+				.queryParam("value", value)
+				.build();
+	}
+
+	public UriComponents addComponentPropertyUri(String component, String name, String value) {
+		return UriComponentsBuilder.fromHttpUrl(baseUrl).path(addComponentPropertyUri)
+				.queryParam("component", component)
+				.queryParam("name", name)
+				.queryParam("value", value)
 				.build();
 	}
 	

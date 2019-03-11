@@ -77,4 +77,15 @@ public class ComponentService {
 			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
 		}
 	}
+
+	public void addComponentProperty(String component, String name, String value) {
+		HttpEntity<UDResourceReq> entity = new HttpEntity<>(manifest.getBasicAuthHeaders());
+		ResponseEntity<String> response = rt.exchange(manifest.addComponentPropertyUri(component, name, value).toUri(), PUT, entity, String.class);
+		
+		int statusCode = response.getStatusCodeValue();
+		if(statusCode == 200) {
+			System.out.println("PROPERTY: [" + name + "=" + value + " ] ADDED TO COMPONENT: [ " + component + " ]");
+		}
+			if(StringUtils.hasText(response.getBody())) System.err.println(response.getBody());
+	}
 }

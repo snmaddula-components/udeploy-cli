@@ -31,9 +31,15 @@ public class Udeploy {
 
 	private String team;
 	private String appName;
+	private String appEAI;
 	private String componentName;
 	private String componentDesc;
 	private String componentPath;
+	private String componentAppName;
+	private String componentDeployDir;
+	private String componentDiskSpace;
+	private String componentSudoUser;
+	
 	private String resourceGroup;
 	private List<DataCenter> dataCenters;
 
@@ -67,11 +73,16 @@ public class Udeploy {
 
 	private void initSimpleFields(Sheet appSheet, Sheet componentSheet) {
 		appName = dataFormatter.formatCellValue(appSheet.getRow(0).getCell(1));
+		appEAI = dataFormatter.formatCellValue(appSheet.getRow(3).getCell(1));
 		resourceGroup = dataFormatter.formatCellValue(appSheet.getRow(5).getCell(1));
 		team = dataFormatter.formatCellValue(appSheet.getRow(7).getCell(1));
 		componentName = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(0));
 		componentDesc = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(1));
+		componentDiskSpace = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(2));
+		componentSudoUser = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(3));
 		componentPath = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(4));
+		componentDeployDir = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(5));
+		componentAppName = dataFormatter.formatCellValue(componentSheet.getRow(1).getCell(6));
 		dataCenters = new ArrayList<>();
 	}
 
